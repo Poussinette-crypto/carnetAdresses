@@ -37,8 +37,8 @@ export class AdresseService {
     return this.http.post<Adresse>(this.adressesUrl, adresse, this.httpOptions);
   }
 
-  deleteAdresse(id: number): Observable<Adresse> {
-    const url = `${this.adressesUrl}/${id}`;
+  deleteAdresse(adresse: Adresse): Observable<Adresse> {
+    const url = `${this.adressesUrl}/${adresse.id}`;
     return this.http.delete<Adresse>(url, this.httpOptions);
   }
 }

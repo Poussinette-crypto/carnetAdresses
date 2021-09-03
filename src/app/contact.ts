@@ -17,3 +17,8 @@ export interface Adresse {
   ville: string;
   pays: string;
 }
+
+export interface updateAdresse {
+  id: number;
+  idContact: number;
+}

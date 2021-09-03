@@ -4,6 +4,8 @@ import {ContactService} from "../contact.service";
 import {ActivatedRoute} from "@angular/router";
 import {Adresse, Contact} from "../contact";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {UpdateAdresseComponent} from "../dialog/update-adresse/update-adresse.component";
 
 @Component({
   selector: 'app-adresse-view',
@@ -14,10 +16,12 @@ export class AdresseViewComponent implements OnInit {
   adresses=[];
   formAdresse;
   busy=true;
+  idContact;
   constructor(
     private adresseService: AdresseService,
     private contactService: ContactService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -26,15 +30,18 @@ export class AdresseViewComponent implements OnInit {
   }
 
   getAdresses(){
-    const idContact = Number(this.route.snapshot.paramMap.get('id'));
+    this.adresses = [];
+    this.idContact = Number(this.route.snapshot.paramMap.get('id'));
     this.adresseService.getAdresses().subscribe(adresses =>  adresses.forEach(adresse => {
-      if (adresse.idContact === idContact){
+      if (adresse.idContact === this.idContact){
         this.adresses.push(adresse);
       }}));
   }
 
   delete(adresse: Adresse): void{
-    this.adresseService.deleteAdresse(adresse.id).subscribe();
+    this.adresseService.deleteAdresse(adresse).subscribe(() => {
+      this.adresses = this.adresses.filter(selAdresse => selAdresse.id !== adresse.id )
+    });
   }
 
   initForm() {
@@ -49,10 +56,25 @@ export class AdresseViewComponent implements OnInit {
     this.busy = false;
   }
 
-  add(){
-    const idContact = Number(this.route.snapshot.paramMap.get('id'));
-    let adresse = {...{idContact : idContact}, ...this.formAdresse.value};
-    this.adresseService.addAdresse(adresse as Adresse).subscribe(() => this.adresses.push(adresse));
+  updateAdresse(identification: number){
+    const dialogRef = this.dialog.open(UpdateAdresseComponent, {
+      data: {id: identification,
+            idContact: this.idContact}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAdresses();
+    });
   }
+
+  ajouterAdresse(){
+    const idContact = Number(this.route.snapshot.paramMap.get('id'));
+    const dialogRef = this.dialog.open(UpdateAdresseComponent, {
+      data: {id: undefined,
+            idContact: idContact}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAdresses();
+    });
+}
 
 }

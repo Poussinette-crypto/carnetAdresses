@@ -24,14 +24,6 @@ export class DetailContactComponent implements OnInit {
       dateOfBirth: new FormControl(this.contact.dateOfBirth,[Validators.required]),
       telephone: new FormControl(this.contact.telephone,[Validators.required])
     });
-    /*
-    this.formAdresse = new FormGroup({
-      id: new FormControl(this.contact.adresse[0].id,[Validators.required]),
-      typeAdresse: new FormControl(this.contact.adresse[0].typeAdresse,[Validators.required]),
-      typeVoie: new FormControl(this.contact.adresse[0].typeVoie,[Validators.required])
-    })
-
-     */
   }
 
 

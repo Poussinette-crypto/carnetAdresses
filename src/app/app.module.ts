@@ -20,6 +20,8 @@ import { NewContactComponent } from './new-contact/new-contact.component';
 import { AdresseViewComponent } from './adresse-view/adresse-view.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from "@angular/material/dialog";
+import { UpdateAdresseComponent } from './dialog/update-adresse/update-adresse.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {MatCardModule} from '@angular/material/card';
     ListeCarnetComponent,
     DetailContactComponent,
     NewContactComponent,
-    AdresseViewComponent
+    AdresseViewComponent,
+    UpdateAdresseComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {MatCardModule} from '@angular/material/card';
     MatNativeDateModule,
     MatFormFieldModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
