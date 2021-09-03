@@ -1,0 +1,48 @@
+<button mat-raised-button (click)="goBack()">Retour</button>
+  <h2>Créer un nouveau contact :</h2>
+    <button mat-raised-button routerLink="/liste">Annuler</button>
+<div *ngIf="busy===false">
+  <form [formGroup]="formContact" (ngSubmit)="add()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prénom :</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nom de famille :</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date de naissance :</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Téléphone :</mat-label>
+      <input matInput formControlName="telephone">
+    </mat-form-field>
+    <!--
+          <div [formGroup]="adresse">
+            <mat-form-field appearance="fill">
+              <mat-label>Adresse :</mat-label>
+              <input matInput placeholder="{{contact.adresse}}" formControlName="id">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Adresse :</mat-label>
+              <input matInput placeholder="{{contact.adresse}}" formControlName="typeAdresse">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Adresse :</mat-label>
+              <input matInput placeholder="{{contact.adresse}}" formControlName="typeVoie">
+            </mat-form-field>
+          </div>
+          -->
+
+    <button mat-raised-button type="submit">Valider</button>
+  </form>
+  <p>Form value : {{formContact.value | json}}</p>
+</div>

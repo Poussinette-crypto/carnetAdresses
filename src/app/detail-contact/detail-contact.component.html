@@ -1,0 +1,70 @@
+<div *ngIf="contact">
+  <button mat-raised-button (click)="goBack()">Retour</button>
+  <h2>{{contact.firstName}} {{contact.lastName | uppercase}}</h2>
+  <div *ngIf="update && !busy">
+    <button mat-raised-button (click)="update = false">Annuler</button>
+    <form [formGroup]="formContact" (ngSubmit)="save(contact.id)">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Prénom :</mat-label>
+        <input matInput placeholder="{{contact.firstName}}" formControlName="firstName">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nom de famille :</mat-label>
+        <input matInput placeholder="{{contact.lastName}}" formControlName="lastName">
+      </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Date de naissance :</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Téléphone :</mat-label>
+        <input matInput formControlName="telephone">
+      </mat-form-field>
+<!--
+      <div [formGroup]="adresse">
+        <mat-form-field appearance="fill">
+          <mat-label>Adresse :</mat-label>
+          <input matInput placeholder="{{contact.adresse}}" formControlName="id">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Adresse :</mat-label>
+          <input matInput placeholder="{{contact.adresse}}" formControlName="typeAdresse">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Adresse :</mat-label>
+          <input matInput placeholder="{{contact.adresse}}" formControlName="typeVoie">
+        </mat-form-field>
+      </div>
+      -->
+
+      <button mat-raised-button type="submit">Valider</button>
+    </form>
+    <p>Form value : {{formContact.value | json}}</p>
+  </div>
+
+  <div *ngIf="!update">
+    <button mat-raised-button (click)="update = true">Modifier</button>
+    <ul>
+      <li>
+        Prénom : {{contact.firstName}}
+      </li>
+      <li>
+        Nom de famille : {{contact.lastName}}
+      </li>
+      <li>
+        Date de naissance : {{contact.dateOfBirth | date:'dd/MM/yyyy'}}
+      </li>
+      <li> Numéro de téléphone : {{contact.telephone}}</li>
+    </ul>
+    <button mat-raised-button (click)="delete(contact)">Supprimer ce contact</button>
+  </div>
+
+  <app-adresse-view></app-adresse-view>
+
+</div>
+

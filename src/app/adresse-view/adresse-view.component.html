@@ -1,0 +1,14 @@
+<p>{{adresses}}</p>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let adresse of adresses">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{adresse.typeAdresse}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{adresse.codePostal + ' ' + adresse.ville}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{adresse.numeroVoie + ' ' + adresse.typeVoie + ' ' + adresse.intituleVoie }}</p>
+  </mat-expansion-panel>
+</mat-accordion>
