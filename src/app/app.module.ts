@@ -19,6 +19,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import { NewContactComponent } from './new-contact/new-contact.component';
 import { AdresseViewComponent } from './adresse-view/adresse-view.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatInputModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

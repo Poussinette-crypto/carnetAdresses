@@ -1,14 +1,52 @@
-<p>{{adresses}}</p>
+<button mat-raised-button (click)="add()">Ajouter une adresse</button>
 <mat-accordion>
   <mat-expansion-panel *ngFor="let adresse of adresses">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{adresse.typeAdresse}}
       </mat-panel-title>
-      <mat-panel-description>
-        {{adresse.codePostal + ' ' + adresse.ville}}
-      </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>{{adresse.numeroVoie + ' ' + adresse.typeVoie + ' ' + adresse.intituleVoie }}</p>
+    <p>{{adresse.numeroVoie + ' ' + adresse.typeVoie + ' ' + adresse.intituleVoie }} <br/>
+      {{adresse.codePostal + ' ' + adresse.ville}}</p>
+    <button mat-raised-button (click)="delete(adresse)">Supprimer cette adresse</button>
   </mat-expansion-panel>
 </mat-accordion>
+<mat-card>
+  <mat-card-title>Ajouter une nouvelle adresse</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="formAdresse" (ngSubmit)="add()">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type d'adresse :</mat-label>
+        <input matInput formControlName="typeAdresse">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Numero de voie :</mat-label>
+        <input matInput formControlName="numeroVoie">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Intitulé de la voie :</mat-label>
+        <input matInput formControlName="intituleVoie">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Code postal :</mat-label>
+        <input matInput formControlName="codePostal">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ville :</mat-label>
+        <input matInput formControlName="ville">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Pays :</mat-label>
+        <input matInput formControlName="pays">
+      </mat-form-field>
+
+      <button mat-raised-button type="submit">Valider</button>
+    </form>
+  </mat-card-content>
+</mat-card>
