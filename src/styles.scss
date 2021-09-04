@@ -2,3 +2,10 @@
 @import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  background-color: #ececec;
+  margin: 0px;
+  padding: 0px;
+}
+

@@ -20,6 +20,7 @@ export class ListeCarnetComponent implements OnInit {
   columnDefs;
   domLayout = "autoHeight"
   contacts: Contact[] = [];
+  busy = true;
 
   constructor(
     private contactService: ContactService,
@@ -37,7 +38,10 @@ export class ListeCarnetComponent implements OnInit {
     this.getContacts();
   }
   getContacts(): void {
-    this.contactService.getContacts().subscribe(contacts => this.contacts = contacts);
+    this.contactService.getContacts().subscribe(contacts => {
+      this.contacts = contacts
+      this.busy = false;
+    });
   }
   goToDetail(): void {
     const selectedRows = this.gridApi.getSelectedRows();

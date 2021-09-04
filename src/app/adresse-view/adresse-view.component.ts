@@ -22,7 +22,7 @@ export class AdresseViewComponent implements OnInit {
     private contactService: ContactService,
     private route: ActivatedRoute,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getAdresses();
@@ -30,12 +30,14 @@ export class AdresseViewComponent implements OnInit {
   }
 
   getAdresses(){
-    this.adresses = [];
     this.idContact = Number(this.route.snapshot.paramMap.get('id'));
-    this.adresseService.getAdresses().subscribe(adresses =>  adresses.forEach(adresse => {
-      if (adresse.idContact === this.idContact){
-        this.adresses.push(adresse);
-      }}));
+    this.adresseService.getAdresses().subscribe(adresses => {
+      this.adresses = [];
+      adresses.forEach(adresse => {
+        if (adresse.idContact === this.idContact){
+          this.adresses.push(adresse);
+        }})
+    });
   }
 
   delete(adresse: Adresse): void{

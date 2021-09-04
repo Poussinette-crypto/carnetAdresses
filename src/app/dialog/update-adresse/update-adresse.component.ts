@@ -78,9 +78,9 @@ export class UpdateAdresseComponent implements OnInit {
     this.adresseService.addAdresse(adresse as Adresse).subscribe(() => this.dialogRef.close());
   }
 
-  valider(id=undefined, idContact=undefined){
+  valider(){
     if(this.data.id){
-      this.save(id, idContact)
+      this.save(this.data.id, this.data.idContact)
       console.log("on modifie")
     }else{
       this.add();

@@ -1,10 +1,12 @@
 <div *ngIf="contact">
-  <button mat-raised-button (click)="goBack()">Retour</button>
-  <h2>{{contact.firstName}} {{contact.lastName | uppercase}}</h2>
+  <div class="title">
+    <button mat-raised-button (click)="goBack()">Retour</button>
+    <h2>{{contact.firstName}} {{contact.lastName | uppercase}}</h2>
+    <p>Identifiant :{{contact.id}}</p>
+  </div>
   <div *ngIf="update && !busy">
-    <button mat-raised-button (click)="update = false">Annuler</button>
     <form [formGroup]="formContact" (ngSubmit)="save(contact.id)">
-
+    <div class="inputs">
       <mat-form-field appearance="fill">
         <mat-label>Prénom :</mat-label>
         <input matInput placeholder="{{contact.firstName}}" formControlName="firstName">
@@ -15,56 +17,47 @@
         <input matInput placeholder="{{contact.lastName}}" formControlName="lastName">
       </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Date de naissance :</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Date de naissance :</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Téléphone :</mat-label>
         <input matInput formControlName="telephone">
       </mat-form-field>
-<!--
-      <div [formGroup]="adresse">
-        <mat-form-field appearance="fill">
-          <mat-label>Adresse :</mat-label>
-          <input matInput placeholder="{{contact.adresse}}" formControlName="id">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Adresse :</mat-label>
-          <input matInput placeholder="{{contact.adresse}}" formControlName="typeAdresse">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Adresse :</mat-label>
-          <input matInput placeholder="{{contact.adresse}}" formControlName="typeVoie">
-        </mat-form-field>
-      </div>
-      -->
+    </div>
 
-      <button mat-raised-button type="submit">Valider</button>
+      <div class="boutons">
+        <button mat-raised-button (click)="update = false">Annuler</button>
+        <button mat-raised-button type="submit">Valider</button>
+      </div>
+
     </form>
-    <p>Form value : {{formContact.value | json}}</p>
   </div>
 
   <div *ngIf="!update">
-    <button mat-raised-button (click)="update = true">Modifier</button>
+    <button mat-raised-button (click)="update = true">Modifier les informations</button>
     <ul>
       <li>
-        Prénom : {{contact.firstName}}
+        <span class="label">Prénom :</span> {{contact.firstName}}
       </li>
       <li>
-        Nom de famille : {{contact.lastName}}
+        <span class="label">Nom de famille :</span> {{contact.lastName}}
       </li>
       <li>
-        Date de naissance : {{contact.dateOfBirth | date:'dd/MM/yyyy'}}
+        <span class="label">Date de naissance :</span> {{contact.dateOfBirth | date:'dd/MM/yyyy'}}
       </li>
-      <li> Numéro de téléphone : {{contact.telephone}}</li>
+      <li> <span class="label">Numéro de téléphone :</span> {{contact.telephone}}</li>
     </ul>
-    <button mat-raised-button (click)="delete(contact)">Supprimer ce contact</button>
+
+    <app-adresse-view></app-adresse-view>
+
+    <button mat-raised-button color="warn" class="supprimer" (click)="delete(contact)">Supprimer ce contact</button>
   </div>
 
-  <app-adresse-view></app-adresse-view>
+
 
 </div>
 

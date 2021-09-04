@@ -11,6 +11,6 @@
     </mat-expansion-panel-header>
     <p>{{adresse.numeroVoie + ' ' + adresse.typeVoie + ' ' + adresse.intituleVoie }} <br/>
       {{adresse.codePostal + ' ' + adresse.ville}}</p>
-    <button mat-raised-button (click)="delete(adresse)">Supprimer cette adresse</button>
+    <button mat-raised-button class="supprimer" color="warn" (click)="delete(adresse)">Supprimer cette adresse</button>
   </mat-expansion-panel>
 </mat-accordion>
